@@ -16,7 +16,7 @@ class GameControl {
 	constructor() {
 		this.snake = new Snake();
 		this.food = new Food();
-		this.scorePanel = new ScorePanel();
+		this.scorePanel = new ScorePanel(10,5);
 
 		this.init();
 	}
@@ -26,12 +26,6 @@ class GameControl {
 		// 绑定键盘按下事件
 		document.addEventListener("keydown", this.keyDownHandler.bind(this));
 		this.run();
-	}
-
-	// 键盘按下的响应函数
-	keyDownHandler(event: KeyboardEvent) {
-		// 修改direction属性
-		this.direction = event.key;
 	}
 
 	// 控制蛇移动的方法
@@ -71,7 +65,7 @@ class GameControl {
 			this.snake.Y = Y;
 		} catch (error: any) {
 			// 出现异常，游戏结束
-			alert(error.message + "，游戏结束");
+			alert(error.message + "游戏结束");
 			this.isLive = false;
 		}
 
@@ -83,6 +77,11 @@ class GameControl {
 			);
 	}
 
+	// 键盘按下的响应函数
+	keyDownHandler(event: KeyboardEvent) {
+		// 修改direction属性
+		this.direction = event.key;
+	}
 	// 检查是否吃到食物
 	checkEat(X: number, Y: number) {
         if(X === this.food.X && Y === this.food.Y){
